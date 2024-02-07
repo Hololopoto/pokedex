@@ -48,7 +48,7 @@ function App() {
 
   console.log("POKEDATA", poke);
   return (
-    <div className="mb-20 px-40 max-[768px]:px-10">
+    <div className="mb-20 mx-auto px-40 max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
         <h1 className="text-3xl text-bold"> Alper </h1>
         <h1 className="text-3xl text-bold"> || POKEDEX || </h1>
@@ -59,13 +59,13 @@ function App() {
           id=""
         />
       </div>
-      <div className="flex gap-11 mx-1 flex-wrap flex-row">
+      <div className="flex mx-auto gap-9 flex-wrap  flex-row">
         {poke.map((x, index) => {
           return (
             <div
               key={index}
-              className="pokes flex-row items-center justify-center border-black border-4 xl:w-[20%] lg:w-[26%] max-[768px]:w-[100%] rounded-lg  flex">
-              <div className="flex-col my-6">
+              className="pokes flex-row items-center justify-center border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg  flex">
+              <div className="flex-col hover:scale-110 transition my-6">
                 <img
                   className="w-[200px] hover:scale-125 transition h-auto"
                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
