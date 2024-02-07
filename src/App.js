@@ -64,8 +64,8 @@ function App() {
           return (
             <div
               key={index}
-              className="pokes flex-row items-center justify-center border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg  flex">
-              <div className="flex-col hover:scale-110 transition my-6">
+              className="pokes flex-row cursor-pointer hover:scale-105 transition items-center justify-center border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg  flex">
+              <div className="flex-col  hover:scale-110 transition my-6">
                 <img
                   className="w-[200px] hover:scale-125 transition h-auto"
                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
