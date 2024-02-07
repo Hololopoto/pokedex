@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const getPokes = async () => {
       const request = await axios(
-        "https://pokeapi.co/api/v2/pokemon?limit=5&offset=0"
+        "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
       );
 
       setPokes(request?.data?.results);
@@ -48,21 +48,23 @@ function App() {
 
   console.log("POKEDATA", poke);
   return (
-    <div>
-      <div className="flex justify-center flex-col">
-        <h2 className="text-2xl font-bold mx-auto ">POKEDEX</h2>
+    <div className="mb-20 px-40">
+      <div className="search my-11 flex flex-col items-center gap-3 w-full justify-center">
+        <h1 className="text-3xl text-bold">POKEDEX</h1>
         <input
+          className="border-black w-1/2 border-4 rounded-md "
           type="search"
-          name="Search Pokemon"
+          name="PokeSearch"
           id=""
-          className="border-black w-1/2 mx-auto border-4 rounded-md"
         />
       </div>
-      {poke.map((x, index) => {
-        return (
-          <div className="flex flex-row" key={index}>
-            <div className="flex flex-row">
-              <div className="flex flex-col">
+      <div className="flex gap-11 mx-11 flex-wrap flex-row">
+        {poke.map((x, index) => {
+          return (
+            <div
+              key={index}
+              className="pokes flex-row items-center justify-center border-black border-4 w-[16%] rounded-lg  flex">
+              <div className="flex-col">
                 <img
                   className="w-[200px] h-auto"
                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
@@ -70,7 +72,7 @@ function App() {
                     .padStart(3, "0")}.png`}
                   alt="PokemonPhoto"
                 />
-                <div className="poke-infos items-center flex-col flex">
+                <div className="poke-infos text-center py-3 gap-1 grid">
                   <div className=" ">
                     {x.name[0].toUpperCase() + x.name.slice(1)}
                   </div>
@@ -85,9 +87,9 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
