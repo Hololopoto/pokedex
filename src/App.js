@@ -4,6 +4,23 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [pokes, setPokes] = useState([]);
   const [poke, setPoke] = useState([]);
+  const pokeBg = {
+    grass: "#8BD369",
+    fire: "#FF603F",
+    water: "#3399FF",
+    bug: "#AABB22",
+    normal: "#AAAA99",
+    flying: "#9AA8FA",
+    poison: "#B76EA4",
+    electric: "#FFD34E",
+    ground: "#E2C56A",
+    fairy: "#F1A8EC",
+    psychic: "#FF6EA4",
+    fighting: "#C56E5C",
+    rock: "#C5B679",
+    dragon: "#7766EE",
+    ice: "#66CCFF",
+  };
   // const Count = 5;
 
   // useEffect(() => {
@@ -33,6 +50,7 @@ function App() {
       setPokes(request?.data?.results);
       // console.log(request?.data?.results);
     };
+
     getPokes();
   }, []);
   // console.log("pokes", pokes);
@@ -48,7 +66,7 @@ function App() {
 
   console.log("POKEDATA", poke);
   return (
-    <div className="mb-20 mx-auto px-40 max-[768px]:px-10 xl:px-30">
+    <div className="mb-20 mx-auto  px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
         <h1 className="text-3xl text-bold"> Alper </h1>
         <h1 className="text-3xl text-bold"> || POKEDEX || </h1>
@@ -64,7 +82,12 @@ function App() {
           return (
             <div
               key={index}
-              className="pokes flex-row cursor-pointer hover:scale-105 transition items-center justify-center border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg  flex">
+              className={
+                pokeBg &&
+                `pokes flex-row cursor-pointer hover:scale-105 transition items-center justify-center bg-[${
+                  pokeBg[x.types[0].type.name]
+                }] border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
+              }>
               <div className="flex-col  hover:scale-110 transition my-6">
                 <img
                   className="w-[200px] hover:scale-125 transition h-auto"
