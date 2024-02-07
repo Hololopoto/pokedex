@@ -49,8 +49,9 @@ function App() {
   console.log("POKEDATA", poke);
   return (
     <div className="mb-20 px-40">
-      <div className="search my-11 flex flex-col items-center gap-3 w-full justify-center">
-        <h1 className="text-3xl text-bold">POKEDEX</h1>
+      <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
+        <h1 className="text-3xl text-bold"> Alper </h1>
+        <h1 className="text-3xl text-bold"> || POKEDEX || </h1>
         <input
           className="border-black w-1/2 border-4 rounded-md "
           type="search"
@@ -64,9 +65,9 @@ function App() {
             <div
               key={index}
               className="pokes flex-row items-center justify-center border-black border-4 w-[16%] rounded-lg  flex">
-              <div className="flex-col">
+              <div className="flex-col my-6">
                 <img
-                  className="w-[200px] h-auto"
+                  className="w-[200px] hover:scale-125 transition h-auto"
                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
                     .toString()
                     .padStart(3, "0")}.png`}
@@ -80,7 +81,8 @@ function App() {
                     {"#" + x.id.toString().padStart(3, "0")}
                   </div>
                   <div className="poke-type">
-                    {x.types[0].type.name[0].toUpperCase() +
+                    {"Type: " +
+                      x.types[0].type.name[0].toUpperCase() +
                       x.types[0].type.name.slice(1)}
                   </div>
                   <div className="poke-weight">{x.weight + "Kg"}</div>
