@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const getPokes = async () => {
       const request = await axios(
-        "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
+        "https://pokeapi.co/api/v2/pokemon?limit=5&offset=0"
       );
 
       setPokes(request?.data?.results);
@@ -60,9 +60,31 @@ function App() {
       </div>
       {poke.map((x, index) => {
         return (
-          <div key={index}>
-            <div>{x.name[0].toUpperCase() + x.name.slice(1)}</div>
-            <div>Alper</div>
+          <div className="flex flex-row" key={index}>
+            <div className="flex flex-row">
+              <div className="flex flex-col">
+                <img
+                  className="w-[200px] h-auto"
+                  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
+                    .toString()
+                    .padStart(3, "0")}.png`}
+                  alt="PokemonPhoto"
+                />
+                <div className="poke-infos items-center flex-col flex">
+                  <div className=" ">
+                    {x.name[0].toUpperCase() + x.name.slice(1)}
+                  </div>
+                  <div className="poke-id">
+                    {"#" + x.id.toString().padStart(3, "0")}
+                  </div>
+                  <div className="poke-type">
+                    {x.types[0].type.name[0].toUpperCase() +
+                      x.types[0].type.name.slice(1)}
+                  </div>
+                  <div className="poke-weight">{x.weight + "Kg"}</div>
+                </div>
+              </div>
+            </div>
           </div>
         );
       })}
