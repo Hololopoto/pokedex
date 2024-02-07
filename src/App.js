@@ -66,7 +66,7 @@ function App() {
 
   console.log("POKEDATA", poke);
   return (
-    <div className="mb-20 mx-auto  px-40  max-[768px]:px-10 xl:px-30">
+    <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
         <h1 className="text-3xl text-bold"> Alper </h1>
         <h1 className="text-3xl text-bold"> || POKEDEX || </h1>
@@ -84,9 +84,7 @@ function App() {
               key={index}
               className={
                 pokeBg &&
-                `pokes flex-row cursor-pointer hover:scale-105 transition items-center justify-center bg-[${
-                  pokeBg[x.types[0].type.name]
-                }] border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
+                `pokes flex-row cursor-pointer hover:scale-105 transition items-center justify-center bg-${x.types[0].type.name} border-black border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
               }>
               <div className="flex-col  hover:scale-110 transition my-6">
                 <img
