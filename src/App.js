@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [pokes, setPokes] = useState([]);
   const [poke, setPoke] = useState([]);
+  const [nextPoke, setNextPoke] = useState([]);
+  const [PrevPoke, setPrevPoke] = useState([]);
   const pokeBg = {
     grass: "#8BD369",
     fire: "#FF603F",
@@ -41,30 +43,62 @@ function App() {
   //   getPokes();
   //   initPokemon();
   // }, []);
+
   useEffect(() => {
     const getPokes = async () => {
       const request = await axios(
-        "https://pokeapi.co/api/v2/pokemon?limit=52&offset=0"
+        "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
       );
 
       setPokes(request?.data?.results);
-      // console.log(request?.data?.results);
+      setNextPoke(request?.data?.next);
+      setPrevPoke(request?.data?.previous);
+      console.log(request?.data?.results);
     };
+    // const handleNextClick = async () => {
+    //   if (nextPoke) {
+    //     const request = await axios(nextPoke);
+    //     setPokes(request?.data?.results);
+    //     setNextPoke(request?.data?.next);
+    //     setPrevPoke(request?.data?.previous);
+    //   }
+    // };
+
+    // const handlePrevClick = async () => {
+    //   if (PrevPoke) {
+    //     const request = await axios(PrevPoke);
+    //     setPokes(request?.data?.results);
+    //     setNextPoke(request?.data?.next);
+    //     setPrevPoke(request?.data?.previous);
+    //   }
+    // };
 
     getPokes();
   }, []);
+  // Datayı Toplayıp Tek Bir Arrayde yazdırmanın 2. yöntemi(ÇOK YAVAŞ)
+  // useEffect(() => {
+  //   pokes.map(async () => {
+  //     const response = await axios.all(
+  //       pokes.map((poke, index) => axios(poke.url))
+  //     );
+  //     const pokeData = response.map((res) => res.data);
+  //     setPoke(pokeData);
+  //   });
+  // }, [pokes]);
   // console.log("pokes", pokes);
   useEffect(() => {
-    pokes.map(async () => {
-      const response = await axios.all(
-        pokes.map((poke, index) => axios(poke.url))
-      );
-      const pokeData = response.map((res) => res.data);
-      setPoke(pokeData);
+    pokes.map(async (poke, index) => {
+      const response = await axios(poke.url);
+      console.log(response.data);
+      setPoke((state) => {
+        state = [...state, response.data];
+        return state;
+      });
     });
   }, [pokes]);
-
+  console.log(setPoke);
   console.log("POKEDATA", poke);
+
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
@@ -113,6 +147,10 @@ function App() {
             </div>
           );
         })}
+      </div>
+      <div className="flex justify-between m-5 ">
+        <button className=" w-52 h-14 rounded-md bg-amber-500">Prev</button>
+        <button className="w-52  h-14 rounded-md bg-amber-500"> Next</button>
       </div>
     </div>
   );
