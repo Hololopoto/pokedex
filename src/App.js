@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [pokes, setPokes] = useState([]);
   const [poke, setPoke] = useState([]);
-  const [nextPoke, setNextPoke] = useState([]);
-  const [PrevPoke, setPrevPoke] = useState([]);
+  const [nextPoke, setNextPoke] = useState();
+  const [PrevPoke, setPrevPoke] = useState();
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
   const pokeBg = {
     grass: "#8BD369",
     fire: "#FF603F",
@@ -46,35 +47,17 @@ function App() {
 
   useEffect(() => {
     const getPokes = async () => {
-      const request = await axios(
-        "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0"
-      );
+      const request = await axios(url);
 
       setPokes(request?.data?.results);
       setNextPoke(request?.data?.next);
       setPrevPoke(request?.data?.previous);
       console.log(request?.data?.results);
     };
-    // const handleNextClick = async () => {
-    //   if (nextPoke) {
-    //     const request = await axios(nextPoke);
-    //     setPokes(request?.data?.results);
-    //     setNextPoke(request?.data?.next);
-    //     setPrevPoke(request?.data?.previous);
-    //   }
-    // };
-
-    // const handlePrevClick = async () => {
-    //   if (PrevPoke) {
-    //     const request = await axios(PrevPoke);
-    //     setPokes(request?.data?.results);
-    //     setNextPoke(request?.data?.next);
-    //     setPrevPoke(request?.data?.previous);
-    //   }
-    // };
 
     getPokes();
-  }, []);
+  }, [url]);
+
   // Datayı Toplayıp Tek Bir Arrayde yazdırmanın 2. yöntemi(ÇOK YAVAŞ)
   // useEffect(() => {
   //   pokes.map(async () => {
@@ -92,11 +75,11 @@ function App() {
       console.log(response.data);
       setPoke((state) => {
         state = [...state, response.data];
+        state.sort((a, b) => (a.id > b.id ? 1 : -1));
         return state;
       });
     });
   }, [pokes]);
-  console.log(setPoke);
   console.log("POKEDATA", poke);
 
   return (
@@ -148,9 +131,23 @@ function App() {
           );
         })}
       </div>
-      <div className="flex justify-between m-5 ">
-        <button className=" w-52 h-14 rounded-md bg-amber-500">Prev</button>
-        <button className="w-52  h-14 rounded-md bg-amber-500"> Next</button>
+      <div className="flex justify-between mt-10 ">
+        <button
+          onClick={() => {
+            setPoke([]);
+            setUrl(PrevPoke);
+          }}
+          className=" w-52 h-14 rounded-md bg-amber-500">
+          Prev
+        </button>
+        <button
+          onClick={() => {
+            setPoke([]);
+            setUrl(nextPoke);
+          }}
+          className="w-52  h-14 rounded-md bg-amber-500">
+          Next
+        </button>
       </div>
     </div>
   );
