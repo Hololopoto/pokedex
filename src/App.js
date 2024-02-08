@@ -44,7 +44,7 @@ function App() {
   useEffect(() => {
     const getPokes = async () => {
       const request = await axios(
-        "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+        "https://pokeapi.co/api/v2/pokemon?limit=52&offset=0"
       );
 
       setPokes(request?.data?.results);
