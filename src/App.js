@@ -74,7 +74,7 @@ function App() {
   useEffect(() => {
     pokes.map(async (poke, index) => {
       const response = await axios(poke.url);
-      console.log(response.data);
+      // console.log(response.data);
       setPoke((state) => {
         state = [...state, response.data];
         state.sort((a, b) => (a.id > b.id ? 1 : -1));
@@ -82,7 +82,14 @@ function App() {
       });
     });
   }, [pokes]);
-
+  const handleSearch = (e) => {
+    setSearch(e.target.value.toLowerCase());
+    const filteredPokes = poke.filter((p) =>
+      p.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    console.log();
+    setFiltered(filteredPokes);
+  };
   console.log("POKEDATA", poke);
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
@@ -93,11 +100,13 @@ function App() {
           className="border-black pl-1 w-1/2 border-4 rounded-md max-[768px]:w-[100%]"
           type="search"
           name="PokeSearch"
+          value={search}
+          onChange={handleSearch}
           placeholder="Place Name A Pokemon"
           id=""
         />
       </div>
-      <div> {search} </div>
+      {/* <div> {search} </div> */}
       <div className="flex mx-auto gap-9 flex-wrap  flex-row">
         {poke.map((x, index) => {
           return (
