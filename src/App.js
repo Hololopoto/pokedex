@@ -85,7 +85,7 @@ function App() {
               style={{ backgroundColor: `${pokeBg[x.types[0].type.name]}` }}
               className={
                 pokeBg &&
-                `pokes flex-row cursor-pointer border-black hover:scale-110 transition items-center justify-center bg-${x.types[0].type.name} border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
+                `pokes flex-row cursor-pointer border-black hover:scale-110 transition items-center justify-center border-4 xl:w-[22%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
               }>
               <div className="flex-col  hover:scale-110 transition my-6">
                 <img
