@@ -141,7 +141,7 @@ function App() {
             setPoke([]);
             setUrl(PrevPoke);
           }}
-          className=" w-52 h-14 rounded-md bg-amber-500">
+          className=" w-52 h-14 max-[768px]:w-40 max-[768px]:h-10 rounded-md bg-amber-500">
           Prev
         </button>
         <button
@@ -149,7 +149,7 @@ function App() {
             setPoke([]);
             setUrl(nextPoke);
           }}
-          className="w-52  h-14 rounded-md bg-amber-500">
+          className="w-52 h-14 max-[768px]:w-40 max-[768px]:h-10 rounded-md bg-amber-500">
           Next
         </button>
       </div>
