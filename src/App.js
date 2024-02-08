@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 function App() {
   const [pokes, setPokes] = useState([]);
   const [poke, setPoke] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState([]);
   const [nextPoke, setNextPoke] = useState();
   const [PrevPoke, setPrevPoke] = useState();
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
@@ -58,7 +60,6 @@ function App() {
 
     getPokes();
   }, [url]);
-
   // Datayı Toplayıp Tek Bir Arrayde yazdırmanın 2. yöntemi(ÇOK YAVAŞ)
   // useEffect(() => {
   //   pokes.map(async () => {
@@ -81,8 +82,8 @@ function App() {
       });
     });
   }, [pokes]);
-  console.log("POKEDATA", poke);
 
+  console.log("POKEDATA", poke);
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
@@ -96,6 +97,7 @@ function App() {
           id=""
         />
       </div>
+      <div> {search} </div>
       <div className="flex mx-auto gap-9 flex-wrap  flex-row">
         {poke.map((x, index) => {
           return (
