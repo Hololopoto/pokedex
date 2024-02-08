@@ -24,6 +24,7 @@ function App() {
     dragon: "#7766EE",
     ice: "#66CCFF",
   };
+  // Apiden idleri sıralayarak veri çekme yöntemi.
   // const Count = 5;
 
   // useEffect(() => {
@@ -88,9 +89,10 @@ function App() {
         <h1 className="text-3xl text-bold"> Alper </h1>
         <h1 className="text-3xl text-bold"> || POKEDEX || </h1>
         <input
-          className="border-black w-1/2 border-4 rounded-md max-[768px]:w-[100%]"
+          className="border-black pl-1 w-1/2 border-4 rounded-md max-[768px]:w-[100%]"
           type="search"
           name="PokeSearch"
+          placeholder="Place Name A Pokemon"
           id=""
         />
       </div>
