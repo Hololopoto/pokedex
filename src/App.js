@@ -55,7 +55,7 @@ function App() {
       setPokes(request?.data?.results);
       setNextPoke(request?.data?.next);
       setPrevPoke(request?.data?.previous);
-      console.log(request?.data?.results);
+      console.log(request?.data);
     };
 
     getPokes();
