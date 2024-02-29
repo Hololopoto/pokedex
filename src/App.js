@@ -107,21 +107,18 @@ function App() {
 
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
-    console.log("Ara", typeof search);
+    console.log("Ara", search);
     if (search !== null) {
       const filteredPokes = spoke.filter((p) =>
         p.name.toLowerCase().includes(e.target.value.toLowerCase())
       );
       console.log(filteredPokes);
       setFiltered(filteredPokes);
-    } else if (search == null) {
-      setFiltered([]);
+      setSearch(null);
     } else {
-      setFiltered([poke]);
+      setFiltered("");
     }
   };
-  console.log(filtered);
-
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
