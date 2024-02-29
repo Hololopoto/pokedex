@@ -64,6 +64,7 @@ function App() {
 
     getPokes();
   }, [url]);
+
   // Datayı Toplayıp Tek Bir Arrayde yazdırmanın 2. yöntemi(ÇOK YAVAŞ)
   // useEffect(() => {
   //   pokes.map(async () => {
@@ -75,6 +76,7 @@ function App() {
   //   });
   // }, [pokes]);
   // console.log("pokes", pokes);
+
   useEffect(() => {
     pokes.map(async (poke, index) => {
       const response = await axios(poke.url);
@@ -86,6 +88,7 @@ function App() {
       });
     });
   }, [pokes]);
+
   useEffect(() => {
     const searchPokes = async () => {
       const request = await axios(SearchUrl);
@@ -93,6 +96,7 @@ function App() {
     };
     searchPokes();
   }, [SearchUrl]);
+
   useEffect(() => {
     spokes.map(async (spok, index) => {
       const response = await axios(spok.url);
@@ -221,8 +225,10 @@ function App() {
       <div className="flex justify-between mt-10 ">
         <button
           onClick={() => {
-            setPoke([]);
-            setUrl(PrevPoke);
+            if (PrevPoke !== null) {
+              setUrl(PrevPoke);
+              setPoke([]);
+            }
           }}
           className=" w-52 h-14 max-[768px]:w-24 max-[768px]:h-10 rounded-md bg-amber-500">
           Prev
