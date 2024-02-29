@@ -120,21 +120,6 @@ function App() {
     }
   };
 
-  // const handleSearch = (e) => {
-  //   const currentValue = e.target.value.toLowerCase();
-  //   setSearch(currentValue); // Arama durumunu güncelle
-
-  //   if (currentValue === "") {
-  //     // Arama çubuğu boşaltıldığında ilk 20 Pokémon'u tekrar yükle
-  //     setFiltered(""); // Filtrelenmiş sonuçları temizle
-  //   } else {
-  //     // Arama değeri mevcut olduğunda filtreyi uygula
-  //     const filteredPokes = spoke.filter((p) =>
-  //       p.name.toLowerCase().includes(currentValue)
-  //     );
-  //     setFiltered(filteredPokes);
-  //   }
-  // };
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
@@ -146,7 +131,7 @@ function App() {
           name="PokeSearch"
           value={search}
           onChange={handleSearch}
-          placeholder="Place Name A Pokemon"
+          placeholder="Please Name A Pokemon"
           id=""
         />
       </div>
