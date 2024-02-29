@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 function App() {
   const [pokes, setPokes] = useState([]);
   const [poke, setPoke] = useState([]);
@@ -10,7 +9,7 @@ function App() {
   const [PrevPoke, setPrevPoke] = useState();
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
   const [SearchUrl, setSearchUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0"
+    "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
   );
   const [spokes, setSpokes] = useState([]);
   const [spoke, setSpoke] = useState([]);
@@ -153,6 +152,10 @@ function App() {
                       .toString()
                       .padStart(3, "0")}.png`}
                     alt="PokemonPhoto"
+                    onError={(e) => {
+                      e.target.src =
+                        "https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png";
+                    }}
                   />
                   <div className="poke-infos text-lg text-center py-3 gap-1 grid">
                     <div className=" ">
@@ -190,8 +193,8 @@ function App() {
                     className="w-[200px] hover:scale-125 transition h-auto"
                     src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
                       .toString()
-                      .padStart(3, "0")}.png`}
-                    alt="PokemonPhoto"
+                      .padStart(3, "0")}.png `}
+                    alt="https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png"
                   />
                   <div className="poke-infos text-lg text-center py-3 gap-1 grid">
                     <div className=" ">
