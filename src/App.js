@@ -106,19 +106,20 @@ function App() {
   }, [spokes]);
 
   const handleSearch = (e) => {
-    setSearch(e.target.value.toLowerCase());
-    console.log("Ara", search);
-    if (search !== null) {
+    const PokeSearch = e.target.value.toLowerCase();
+    setSearch(PokeSearch);
+    console.log("Ara", PokeSearch);
+    if (search === "") {
+      setFiltered("");
+    } else {
       const filteredPokes = spoke.filter((p) =>
-        p.name.toLowerCase().includes(e.target.value.toLowerCase())
+        p.name.toLowerCase().includes(PokeSearch)
       );
       console.log(filteredPokes);
       setFiltered(filteredPokes);
-      setSearch(null);
-    } else {
-      setFiltered("");
     }
   };
+
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
