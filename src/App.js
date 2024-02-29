@@ -115,7 +115,6 @@ function App() {
       );
       console.log(filteredPokes);
       setFiltered(filteredPokes);
-      setSearch(null);
     } else {
       setFiltered("");
     }
