@@ -9,6 +9,11 @@ function App() {
   const [nextPoke, setNextPoke] = useState();
   const [PrevPoke, setPrevPoke] = useState();
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
+  const [SearchUrl, setSearchUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon?limit=1000&offset=0"
+  );
+  const [spokes, setSpokes] = useState([]);
+  const [spoke, setSpoke] = useState([]);
   const pokeBg = {
     grass: "#8BD369",
     fire: "#FF603F",
@@ -55,7 +60,7 @@ function App() {
       setPokes(request?.data?.results);
       setNextPoke(request?.data?.next);
       setPrevPoke(request?.data?.previous);
-      console.log(request?.data);
+      console.log(request?.data?.results);
     };
 
     getPokes();
@@ -74,7 +79,7 @@ function App() {
   useEffect(() => {
     pokes.map(async (poke, index) => {
       const response = await axios(poke.url);
-      // console.log(response.data);
+      // console.log("Pokemonlar", response.data);
       setPoke((state) => {
         state = [...state, response.data];
         state.sort((a, b) => (a.id > b.id ? 1 : -1));
@@ -82,15 +87,34 @@ function App() {
       });
     });
   }, [pokes]);
+  useEffect(() => {
+    const searchPokes = async () => {
+      const request = await axios(SearchUrl);
+      setSpokes(request?.data?.results);
+    };
+    searchPokes();
+  }, [SearchUrl]);
+  useEffect(() => {
+    spokes.map(async (pok, index) => {
+      const response = await axios(pok.url);
+      // console.log("Arama", response.data);
+      setSpoke((state) => {
+        state = [...state, response.data];
+        state.sort((a, b) => (a.id > b.id ? 1 : -1));
+        return state;
+      });
+    });
+  }, [spokes]);
+
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
-    const filteredPokes = poke.filter((p) =>
+    const filteredPokes = spoke.filter((p) =>
       p.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
-    console.log();
+    console.log(filteredPokes);
     setFiltered(filteredPokes);
   };
-  console.log("POKEDATA", poke);
+
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
@@ -108,7 +132,7 @@ function App() {
       </div>
       {/* <div> {search} </div> */}
       <div className="flex mx-auto gap-9 flex-wrap  flex-row">
-        {poke.map((x, index) => {
+        {filtered.map((x, index) => {
           return (
             <div
               key={index}
