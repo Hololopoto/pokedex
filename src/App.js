@@ -5,7 +5,7 @@ function App() {
   const [pokes, setPokes] = useState([]);
   const [poke, setPoke] = useState([]);
   const [search, setSearch] = useState("");
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState("");
   const [nextPoke, setNextPoke] = useState();
   const [PrevPoke, setPrevPoke] = useState();
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
@@ -108,18 +108,18 @@ function App() {
 
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
-    console.log("Ara", search.length);
-    if (search.length !== 0) {
+    console.log("Ara", search);
+    if (search !== null) {
       const filteredPokes = spoke.filter((p) =>
         p.name.toLowerCase().includes(e.target.value.toLowerCase())
       );
       console.log(filteredPokes);
       setFiltered(filteredPokes);
+      setSearch(null);
     } else {
-      setFiltered([]);
+      setFiltered("");
     }
   };
-
   return (
     <div className="mb-20 mx-auto   px-40  max-[768px]:px-10 xl:px-30">
       <div className="search my-11 flex flex-col items-center gap-6 w-full justify-center">
@@ -135,44 +135,85 @@ function App() {
           id=""
         />
       </div>
-      {/* <div> {search} </div> */}
-      <div className="flex mx-auto gap-9 flex-wrap  flex-row">
-        {filtered.map((x, index) => {
-          return (
-            <div
-              key={index}
-              style={{ backgroundColor: `${pokeBg[x.types[0].type.name]}` }}
-              className={
-                pokeBg &&
-                `pokes flex-row cursor-pointer border-black hover:scale-110 transition items-center justify-center border-4 xl:w-[18%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
-              }>
-              <div className="flex-col  hover:scale-110 transition my-6">
-                <img
-                  className="w-[200px] hover:scale-125 transition h-auto"
-                  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
-                    .toString()
-                    .padStart(3, "0")}.png`}
-                  alt="PokemonPhoto"
-                />
-                <div className="poke-infos text-lg text-center py-3 gap-1 grid">
-                  <div className=" ">
-                    {x.name[0].toUpperCase() + x.name.slice(1)}
+      {filtered && (
+        <div className="flex mx-auto gap-9 flex-wrap  flex-row">
+          {filtered.map((x, index) => {
+            return (
+              <div
+                key={index}
+                style={{ backgroundColor: `${pokeBg[x.types[0].type.name]}` }}
+                className={
+                  pokeBg &&
+                  `pokes flex-row cursor-pointer border-black hover:scale-110 transition items-center justify-center border-4 xl:w-[18%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
+                }>
+                <div className="flex-col  hover:scale-110 transition my-6">
+                  <img
+                    className="w-[200px] hover:scale-125 transition h-auto"
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
+                      .toString()
+                      .padStart(3, "0")}.png`}
+                    alt="PokemonPhoto"
+                  />
+                  <div className="poke-infos text-lg text-center py-3 gap-1 grid">
+                    <div className=" ">
+                      {x.name[0].toUpperCase() + x.name.slice(1)}
+                    </div>
+                    <div className="poke-id">
+                      {"#" + x.id.toString().padStart(3, "0")}
+                    </div>
+                    <div className="poke-type">
+                      {"Type: " +
+                        x.types[0].type.name[0].toUpperCase() +
+                        x.types[0].type.name.slice(1)}
+                    </div>
+                    <div className="poke-weight">{x.weight + " Kg"}</div>
                   </div>
-                  <div className="poke-id">
-                    {"#" + x.id.toString().padStart(3, "0")}
-                  </div>
-                  <div className="poke-type">
-                    {"Type: " +
-                      x.types[0].type.name[0].toUpperCase() +
-                      x.types[0].type.name.slice(1)}
-                  </div>
-                  <div className="poke-weight">{x.weight + " Kg"}</div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
+      {filtered === "" && (
+        <div className="flex mx-auto gap-9 flex-wrap  flex-row">
+          {poke.map((x, index) => {
+            return (
+              <div
+                key={index}
+                style={{ backgroundColor: `${pokeBg[x.types[0].type.name]}` }}
+                className={
+                  pokeBg &&
+                  `pokes flex-row cursor-pointer border-black hover:scale-110 transition items-center justify-center border-4 xl:w-[18%] lg:w-[46%] md:w-[46%] max-[768px]:w-[100%] rounded-lg flex`
+                }>
+                <div className="flex-col  hover:scale-110 transition my-6">
+                  <img
+                    className="w-[200px] hover:scale-125 transition h-auto"
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${x.id
+                      .toString()
+                      .padStart(3, "0")}.png`}
+                    alt="PokemonPhoto"
+                  />
+                  <div className="poke-infos text-lg text-center py-3 gap-1 grid">
+                    <div className=" ">
+                      {x.name[0].toUpperCase() + x.name.slice(1)}
+                    </div>
+                    <div className="poke-id">
+                      {"#" + x.id.toString().padStart(3, "0")}
+                    </div>
+                    <div className="poke-type">
+                      {"Type: " +
+                        x.types[0].type.name[0].toUpperCase() +
+                        x.types[0].type.name.slice(1)}
+                    </div>
+                    <div className="poke-weight">{x.weight + " Kg"}</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       <div className="flex justify-between mt-10 ">
         <button
           onClick={() => {
