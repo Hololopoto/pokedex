@@ -9,7 +9,7 @@ function App() {
   const [PrevPoke, setPrevPoke] = useState();
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
   const [SearchUrl, setSearchUrl] = useState(
-    "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+    "https://pokeapi.co/api/v2/pokemon?limit=1302&offset=0"
   );
   const [spokes, setSpokes] = useState([]);
   const [spoke, setSpoke] = useState([]);
@@ -200,6 +200,10 @@ function App() {
                       .toString()
                       .padStart(3, "0")}.png `}
                     alt="https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png"
+                    onError={(e) => {
+                      e.target.src =
+                        "https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png";
+                    }}
                   />
                   <div className="poke-infos text-lg text-center py-3 gap-1 grid">
                     <div className=" ">
